@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Корневой контейнер ConstraintLayout.
+    Позволяет гибко позиционировать элементы, привязывая их стороны друг к другу («нити»).
+-->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +12,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--
+        КНОПКА 1: «Кликни меня!»
+        android:id — уникальное имя кнопки, по которому мы находим её в Kotlin-коде через findViewById.
+        layout_width / layout_height = wrap_content — кнопка сжимается строго под размер текста.
+        app:layout_constraint... — центрируют кнопку ровно посередине экрана: привязка ко всем 4 краям родителя.
+    -->
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -17,6 +28,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--
+        КОНТЕЙНЕР ДЛЯ ИЗОБРАЖЕНИЯ (ImageView)
+        android:src — путь к картинке, лежащей в res/drawable.
+        android:visibility="gone" — КРИТИЧЕСКИ ВАЖНО: элемент полностью скрыт при запуске
+                                     и не занимает места на экране.
+        Привязан верхним краем к нижней части кнопки button — появится строго под ней.
+    -->
     <ImageView
         android:id="@+id/myImageView"
         android:layout_width="300dp"
@@ -26,8 +44,14 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
+    <!--
+        КНОПКА 2: «Закрыть» (добавлена в рамках самостоятельной работы ПР4)
+        Изначально невидима (visibility="gone").
+        Расположена внизу экрана, прижата к нижнему краю родителя,
+        сверху ограничена картинкой — так создаётся аккуратный вертикальный список.
+    -->
     <Button
         android:id="@+id/buttonClose"
         android:layout_width="wrap_content"
